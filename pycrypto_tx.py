@@ -25,8 +25,15 @@ class price:
         self.crypto = crypto
         self.crypto_type = crypto_type
         self.cash_type = cash_type
-
+        self.price = 0
     def price_calculator(self):
         
         price_raw = cryptocompare.get_price(self.crypto_type,self.cash_type)
         price_pure = price_raw[self.crypto_type][self.cash_type]
+        self.price = price_pure
+        return price_pure
+
+    def num_calculator(self):
+
+        crypto_num = self.cash / self.price
+        return crypto_num
