@@ -37,3 +37,14 @@ class price:
 
         crypto_num = self.cash / self.price
         return crypto_num
+
+class log:
+    def __init__(self,crypto_num,crypto_type,cash_amount):
+        self.crypto_num = crypto_num
+        self.crypto_type = crypto_type
+        self.cash_amount= cash_amount
+    def logger(self,file_directory):
+        now = datetime.now()
+        date_string = now.strftime("%d/%m/%Y %H:%M:%S")
+        output = date_string + "sent" + self.crypto_num + "of" + self.crypto_type + " (" + self.cash_amount + ")"
+        
