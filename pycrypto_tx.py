@@ -14,23 +14,21 @@ class trading:
     
     def transaction_eth(self):
         web3 = Web3(Web3.HTTPProvider(self.url))
-        nonce = web3.eth.getTransactionCount(self.address_start)
+        nonce = web3.eth.getTransactionCount(self.start_address)
         transaction_info = {"nonce":nonce, "to":self.destination_address, "value": web3.toWei(self.crypto_num,"ether"), "gas": 2000000, 'gasPrice': web3.toWei('50', 'gwei')}
         transaction_sign = web3.eth.account.sign_transaction(transaction_info,self.start_privatekey)
 
 class price:
 
-    def __init__(self,cash,crypto,crypto_type,cash_type):
+    def __init__(self,cash,crypto_num,crypto_type,cash_type):
 
         self.cash = cash
-        self.crypto = crypto
+        self.crypto_num = crypto_num
         self.crypto_type = crypto_type
         self.cash_type = cash_type
         self.price = 0
     def price_calculator(self):
         
-        #cypto_type, cash_type
-        #return: price_pure
         price_raw = cryptocompare.get_price(self.crypto_type,self.cash_type)
         price_pure = price_raw[self.crypto_type][self.cash_type]
         self.price = price_pure
@@ -38,8 +36,8 @@ class price:
 
     def num_calculator(self):
 
-        crypto_num = self.cash / self.price
-        return crypto_num
+        self.crypto_num = self.cash / self.price
+        return self.crypto_num
 
 class log:
     def __init__(self,crypto_num,crypto_type,cash_amount,file_directory):

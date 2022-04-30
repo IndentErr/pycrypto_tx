@@ -1,6 +1,7 @@
 import pycrypto_tx
 
-tx = pycrypto_tx.price
-price_example = tx.price_calculator()
+#cash,crypto_num,crypto_type,cash_type
+#price_calculator
 
-print(price_example)
+tx_price_calculator = pycrypto_tx.price(100,0,"ETH","USD")
+price_calc = tx_price_calculator.price_calculator()
