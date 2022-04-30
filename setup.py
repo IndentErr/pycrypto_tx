@@ -15,5 +15,4 @@ packages = find_packages(),
 install_requires = ["cryptocompare","datetime","logging","web3"],
 python_version = ">=3.6",
 long_description=open('README.md').read(),
-
 )
