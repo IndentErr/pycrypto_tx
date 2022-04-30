@@ -5,3 +5,4 @@ import pycrypto_tx
 
 tx_price_calculator = pycrypto_tx.price(100,0,"ETH","USD")
 price_calc = tx_price_calculator.price_calculator()
+print(price_calc)
