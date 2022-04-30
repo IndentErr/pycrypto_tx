@@ -4,8 +4,7 @@ import logging
 from web3 import Web3
 
 class trading:
-    def __init__(self,cash,crypto_num,url,start_address,start_privatekey,destination_address):
-        self.cash = cash
+    def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address):
         self.crypto_num = crypto_num
         self.url = url
         self.start_address = start_address
@@ -17,6 +16,9 @@ class trading:
         nonce = web3.eth.getTransactionCount(self.start_address)
         transaction_info = {"nonce":nonce, "to":self.destination_address, "value": web3.toWei(self.crypto_num,"ether"), "gas": 2000000, 'gasPrice': web3.toWei('50', 'gwei')}
         transaction_sign = web3.eth.account.sign_transaction(transaction_info,self.start_privatekey)
+
+    def transaction_btc(self):
+        transaction_info = {}
 
 class price:
 
