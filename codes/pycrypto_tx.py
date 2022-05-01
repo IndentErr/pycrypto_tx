@@ -60,3 +60,25 @@ class log:
             with open(self.file_directory) as w:
                 pass
         logging.info(output)
+
+class wallet:
+    
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url):
+        self.wallet_address = wallet_address
+        self.wallet_privatekey = wallet_privatekey
+        self.wallet_balance = wallet_balance
+        self.wallet_history = wallet_history
+        self.web3 = Web3(Web3.HTTPprovider(web3_url))
+
+    def check_balance(self):
+        
+        web3 = self.web3
+        wallet = self.wallet_address
+        balance = web3.eth.get_balance(wallet)
+        self.wallet_balace = balance
+        return self.wallet_balance
+
+    def create(self):
+        
+        #under development
+        return self.wallet_address
