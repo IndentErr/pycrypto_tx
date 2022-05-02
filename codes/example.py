@@ -1,4 +1,4 @@
-import codes.pycrypto_tx as pycrypto_tx
+import pycrypto_tx
 
 #cash,crypto_num,crypto_type,cash_type
 #price_calculator

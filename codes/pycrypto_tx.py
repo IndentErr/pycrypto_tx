@@ -2,6 +2,11 @@ import cryptocompare
 import datetime
 import logging
 from web3 import Web3
+import secrets
+import codecs
+import os
+from Crypto.Hash import keccak
+import ecdsa
 
 class trading:
     def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address):
@@ -63,12 +68,13 @@ class log:
 
 class wallet:
     
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url):
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url,public_key):
         self.wallet_address = wallet_address
         self.wallet_privatekey = wallet_privatekey
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
         self.web3 = Web3(Web3.HTTPprovider(web3_url))
+        self.public_key = self.public_key
 
     def check_balance(self):
         
@@ -78,7 +84,23 @@ class wallet:
         self.wallet_balace = balance
         return self.wallet_balance
 
-    def create(self):
+    def create_private(self):
+        curve_order =  0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
         
+        while True:
+            if int(self.wallet_privatekey, 16) < curve_order:
+                return self.wallet_privatekey
+    
+    def create_publickey(self):
+        
+        private_key_bytes = codecs.decode(self.wallet_privatekey, "hex")
+        public_key_bytes =  (ecdsa.SigningKey.from_string(private_key_bytes, curve=ecdsa.SECP256k1).get_verifying_key().to_string())
+
+        self.public_key = codecs.encode(public_key_bytes, "hex")
+        return self.public_key
+
+    def create_address(self):
+
+        k = keccak.new(digest_bits = 256)
         #under development
         return self.wallet_address

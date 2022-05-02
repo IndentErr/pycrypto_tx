@@ -12,7 +12,7 @@ author = "IndentErr",
 description = "Free and easy python cryptocurrency transaction library",
 url = "https://github.com/IndentErr/pycrypto_tx",
 packages = find_packages(),
-install_requires = ["cryptocompare","datetime","logging","web3"],
+install_requires = ["cryptocompare","datetime","logging","web3","secrets","codecs","os","Crypto.Hash","ecdsa"],
 python_version = ">=3.6",
 long_description=open('README.md').read(),
 )
