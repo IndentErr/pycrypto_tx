@@ -7,6 +7,7 @@ import codecs
 import re
 from Crypto.Hash import keccak
 import ecdsa
+from hexbytes import Hexbytes
 
 class trading:
     def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address):
@@ -86,6 +87,7 @@ class wallet_ethereum:
         self.wallet_balace = balance
         return self.wallet_balance
 
+    #start of creating wallet
     def create_private(self):
         curve_order =  0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
         
@@ -119,6 +121,14 @@ class wallet_ethereum:
             return True
         else:
             pass
+
+    #end of creating wallet
+
+    def check_history(self):
+
+        result = {}
+
+        return self.wallet_history
 
 class wallet_bitcoin:
     
