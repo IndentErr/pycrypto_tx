@@ -4,7 +4,7 @@ import logging
 from web3 import Web3
 import secrets
 import codecs
-import os
+import re
 from Crypto.Hash import keccak
 import ecdsa
 
@@ -23,6 +23,8 @@ class trading:
         transaction_sign = web3.eth.account.sign_transaction(transaction_info,self.start_privatekey)
 
     def transaction_btc(self):
+
+        #under development
         transaction_info = {}
 
 class price:
@@ -88,6 +90,8 @@ class wallet:
         curve_order =  0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
         
         while True:
+
+            self.private_key = secrets.token_hex(32)
             if int(self.wallet_privatekey, 16) < curve_order:
                 return self.wallet_privatekey
     
@@ -104,3 +108,14 @@ class wallet:
         k = keccak.new(digest_bits = 256)
         #under development
         return self.wallet_address
+
+    def check_address(self):
+        #The source code is originated from https://github.com/vgaicuks/ethereum-address/blob/master/ethereum_address/utils.py (Apache 2.0 License)
+        if not re.match(r'^(0x)?[0-9a-f]{40}$', self.wallet_address, flags=re.IGNORECASE):
+            return False
+        
+        elif re.match(r'^(0x)?[0-9a-f]{40}$', self.wallet_address) or re.match(r'^(0x)?[0-9A-F]{40}$', self.wallet_address):
+
+            return True
+        else:
+            pass
