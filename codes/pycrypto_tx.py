@@ -68,7 +68,7 @@ class log:
                 pass
         logging.info(output)
 
-class wallet:
+class wallet_ethereum:
     
     def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url,public_key):
         self.wallet_address = wallet_address
@@ -76,7 +76,7 @@ class wallet:
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
         self.web3 = Web3(Web3.HTTPprovider(web3_url))
-        self.public_key = self.public_key
+        self.public_key = public_key
 
     def check_balance(self):
         
@@ -119,3 +119,14 @@ class wallet:
             return True
         else:
             pass
+
+class wallet_bitcoin:
+    
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,public_key):
+
+        self.wallet_address = wallet_address
+        self.wallet_privatekey = wallet_privatekey
+        self.wallet_balance = wallet_balance
+        self.wallet_history = wallet_history
+        self.url = url
+        self.public_key = public_key
