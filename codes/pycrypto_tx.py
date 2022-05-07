@@ -133,7 +133,7 @@ class wallet_ethereum:
 
 class wallet_bitcoin:
     
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,wallet_public_key,wallet_name):
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,wallet_public_key,wallet_name,wallet):
 
         self.wallet_address = wallet_address
         self.wallet_privatekey = wallet_privatekey
@@ -142,16 +142,19 @@ class wallet_bitcoin:
         self.url = url
         self.public_key = wallet_public_key
         self.wallet_name = wallet_name
+        self.wallet = wallet
 
     def create_address(self):
-        wallet_btc = Wallet.create(self.wallet_name)
-        key_btc = wallet_btc.get_key()
+        self.wallet = Wallet.create(self.wallet_name)
+        key_btc = self.wallet.get_key()
         self.wallet_adress = key_btc.address
 
         return self.wallet_address
 
     def check_balance(self):
-
+        self.wallet.scan()
+        self.wallet.info()
+        self.wallet_balance = self.wallet.info()
         
         return self.wallet_balance
 
