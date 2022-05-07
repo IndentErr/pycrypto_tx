@@ -11,23 +11,29 @@ from hexbytes import Hexbytes
 from bitcoinlib.wallets import Wallet
 
 class trading:
-    def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address):
+    def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address,wallet,transaction_info):
         self.crypto_num = crypto_num
         self.url = url
         self.start_address = start_address
         self.start_privatekey = start_privatekey
         self.destination_address = destination_address
+        self.wallet = wallet
+        self.transaction_info = transaction_info
     
     def transaction_eth(self):
         web3 = Web3(Web3.HTTPProvider(self.url))
         nonce = web3.eth.getTransactionCount(self.start_address)
-        transaction_info = {"nonce":nonce, "to":self.destination_address, "value": web3.toWei(self.crypto_num,"ether"), "gas": 2000000, 'gasPrice': web3.toWei('50', 'gwei')}
-        transaction_sign = web3.eth.account.sign_transaction(transaction_info,self.start_privatekey)
+        self.transaction_info = {"nonce":nonce, "to":self.destination_address, "value": web3.toWei(self.crypto_num,"ether"), "gas": 2000000, 'gasPrice': web3.toWei('50', 'gwei')}
+        web3.eth.account.sign_transaction(self.transaction_info,self.start_privatekey)
+
+        return self.transaction_info
 
     def transaction_btc(self):
 
         #under development
-        transaction_info = {}
+        t = self.wallet.send_to(self.destination_address,self.crypto_num)
+        self.transaction_info = t.info()
+        return self.transaction_info
 
 class price:
 
@@ -127,6 +133,7 @@ class wallet_ethereum:
 
     def check_history(self):
 
+        #hexbytes library here
         result = {}
 
         return self.wallet_history
@@ -153,7 +160,6 @@ class wallet_bitcoin:
 
     def check_balance(self):
         self.wallet.scan()
-        self.wallet.info()
         self.wallet_balance = self.wallet.info()
         
         return self.wallet_balance
@@ -161,3 +167,7 @@ class wallet_bitcoin:
     def check_address(self):
 
         return True
+    
+    def check_history(self):
+
+        return self.wallet_history
