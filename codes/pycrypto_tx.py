@@ -8,6 +8,7 @@ import re
 from Crypto.Hash import keccak
 import ecdsa
 from hexbytes import Hexbytes
+from bitcoinlib.wallets import Wallet
 
 class trading:
     def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address):
@@ -132,11 +133,28 @@ class wallet_ethereum:
 
 class wallet_bitcoin:
     
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,public_key):
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,wallet_public_key,wallet_name):
 
         self.wallet_address = wallet_address
         self.wallet_privatekey = wallet_privatekey
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
         self.url = url
-        self.public_key = public_key
+        self.public_key = wallet_public_key
+        self.wallet_name = wallet_name
+
+    def create_address(self):
+        wallet_btc = Wallet.create(self.wallet_name)
+        key_btc = wallet_btc.get_key()
+        self.wallet_adress = key_btc.address
+
+        return self.wallet_address
+
+    def check_balance(self):
+
+        
+        return self.wallet_balance
+
+    def check_address(self):
+
+        return True
