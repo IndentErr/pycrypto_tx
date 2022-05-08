@@ -7,7 +7,6 @@ import codecs
 import re
 from Crypto.Hash import keccak
 import ecdsa
-from hexbytes import Hexbytes
 from bitcoinlib.wallets import Wallet
 
 class trading:
@@ -37,13 +36,13 @@ class trading:
 
 class price:
 
-    def __init__(self,cash,crypto_num,crypto_type,cash_type):
+    def __init__(self,cash,crypto_num,crypto_type,cash_type,price):
 
         self.cash = cash
         self.crypto_num = crypto_num
         self.crypto_type = crypto_type
         self.cash_type = cash_type
-        self.price = 0
+        self.price = price
     def price_calculator(self):
         
         price_raw = cryptocompare.get_price(self.crypto_type,self.cash_type)
