@@ -8,6 +8,8 @@ import re
 from Crypto.Hash import keccak
 import ecdsa
 from bitcoinlib.wallets import Wallet
+from base58 import b58decode
+from hashlib import sha256
 
 class trading:
     def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address,wallet,transaction_info):
@@ -165,7 +167,42 @@ class wallet_bitcoin:
 
     def check_address(self):
 
-        return True
+        valid = None
+        bitcoin_address_decoded = b58decode(self.wallet_address)
+        version_plus_payload = bitcoin_address_decoded[:-4]
+        checksum_found = bitcoin_address_decoded[-4:]
+
+        #calculate real checksum
+        checksum_real = sha256(sha256(version_plus_payload).digest()).digest()[:4]
+
+        address_type = None
+        version_prefix = version_plus_payload.hex()[0:8]
+        if version_prefix[0:2] == "00":
+            address_type = "Bitcoin Address"
+
+        elif version_prefix[0:2] == "05":
+            address_type = "Pay-to-Script-Hash Address"
+
+        elif version_prefix[0:2] == "6F":
+            address_type = "Bitcoin Testnet Address"
+
+        elif version_prefix[0:2] == "80":
+            address_type = "Private Key WIF"
+
+        elif version_prefix[0:4] == "0142":
+            address_type = "BIP-38 Encrypted Private Key"
+
+        elif version_prefix[0:8] == "0488B21E":
+            address_type = "BIP-32 Extended Public Key"
+
+        output = [valid,address_type]
+
+        if checksum_found == checksum_real:
+            valid = True
+        elif checksum_found != checksum_real:
+            valid = False
+            
+        return output
     
     def check_history(self):
 
