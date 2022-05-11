@@ -11,6 +11,7 @@ from bitcoinlib.wallets import Wallet
 from base58 import b58decode
 from hashlib import sha256
 
+#class or method under development: wallet_bitcoin.check_history(), wallet_ethereum.check_history()
 class trading:
     def __init__(self,crypto_num,url,start_address,start_privatekey,destination_address,wallet,transaction_info):
         self.crypto_num = crypto_num
@@ -201,7 +202,7 @@ class wallet_bitcoin:
             valid = True
         elif checksum_found != checksum_real:
             valid = False
-            
+
         return output
     
     def check_history(self):
