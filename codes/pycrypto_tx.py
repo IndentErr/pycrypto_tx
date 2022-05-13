@@ -80,13 +80,14 @@ class log:
 
 class wallet_ethereum:
     
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url,public_key):
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,web3_url,public_key,block_num):
         self.wallet_address = wallet_address
         self.wallet_privatekey = wallet_privatekey
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
         self.web3 = Web3(Web3.HTTPprovider(web3_url))
         self.public_key = public_key
+        self.block_num = block_num
 
     def check_balance(self):
         
@@ -135,10 +136,13 @@ class wallet_ethereum:
 
     def check_history(self):
 
-        #hexbytes library here
-        result = {}
-
         return self.wallet_history
+        
+    def check_block(self):
+
+        result = self.web3.eth.get_block(self.block_num)
+        
+        return result
 
 class wallet_bitcoin:
     
@@ -206,5 +210,5 @@ class wallet_bitcoin:
         return output
     
     def check_history(self):
-
+        
         return self.wallet_history
