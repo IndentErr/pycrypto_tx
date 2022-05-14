@@ -118,7 +118,11 @@ class wallet_ethereum:
     def create_address(self):
 
         k = keccak.new(digest_bits = 256)
-        #under development
+        k.update(codecs.decode(self.public_key,"hex"))
+        k_hash = k.hexdigest()
+        address = "0x" + k_hash[-40:] # last 20bytes
+        self.wallet_address = address
+
         return self.wallet_address
 
     def check_address(self):
