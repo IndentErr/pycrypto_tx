@@ -10,6 +10,9 @@ import ecdsa
 from bitcoinlib.wallets import Wallet
 from base58 import b58decode
 from hashlib import sha256
+import os
+import random
+import time
 
 #class or method under development: wallet_bitcoin.check_history(), wallet_ethereum.check_history()
 class trading:
@@ -134,7 +137,7 @@ class wallet_ethereum:
 
             return True
         else:
-            pass
+            return False
 
     #end of creating wallet
 
@@ -203,11 +206,16 @@ class wallet_bitcoin:
         elif version_prefix[0:8] == "0488B21E":
             address_type = "BIP-32 Extended Public Key"
 
+        else:
+            address_type = False
+
         output = [valid,address_type]
 
         if checksum_found == checksum_real:
             valid = True
         elif checksum_found != checksum_real:
+            valid = False
+        else:
             valid = False
 
         return output
@@ -217,6 +225,7 @@ class wallet_bitcoin:
         return self.wallet_history
 
 class wallet_Tether:
+    #Tether shares same blockchain with bitcoin
 
     def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,wallet_public_key,wallet_name,wallet):
 
@@ -230,4 +239,18 @@ class wallet_Tether:
     
     def create_address(self):
 
-        self.wallet = Wallet.create(self.wallet_name)
+        r = str(os.urandom(32)) \
+            + str(random.randrange(2 ** 256)) \
+            + str(int(time.time() * 1000000))
+    
+        r = bytes(r, "utf-8")
+        h = hashlib.sha256(r).digest()
+        key = "".join("{:02x}".format(y) for y in h)
+        
+        while True:
+            if int(key, 17) < N:
+                break 
+
+    def check_balance(self):
+
+        return self.wallet_balance
