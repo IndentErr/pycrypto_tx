@@ -150,13 +150,12 @@ class wallet_ethereum:
 
 class wallet_bitcoin:
     
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,url,wallet_public_key,wallet_name,wallet):
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,wallet_public_key,wallet_name,wallet):
 
         self.wallet_address = wallet_address
         self.wallet_privatekey = wallet_privatekey
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
-        self.url = url
         self.public_key = wallet_public_key
         self.wallet_name = wallet_name
         self.wallet = wallet
@@ -216,3 +215,19 @@ class wallet_bitcoin:
     def check_history(self):
         
         return self.wallet_history
+
+class wallet_Tether:
+
+    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,wallet_public_key,wallet_name,wallet):
+
+        self.wallet_address = wallet_address
+        self.wallet_privatekey = wallet_privatekey
+        self.wallet_balance = wallet_balance
+        self.wallet_history = wallet_history
+        self.wallet_public_key = wallet_public_key
+        self.wallet_name = wallet_name
+        self.wallet = wallet
+    
+    def create_address(self):
+
+        self.wallet = Wallet.create(self.wallet_name)
