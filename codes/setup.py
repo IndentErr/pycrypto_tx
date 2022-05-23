@@ -1,8 +1,5 @@
 from setuptools import setup, find_packages
 
-with open("README.md") as fh:
-    long_description = fh.read()
-
 
 setup(
 name = "pycrypto_tx - IndentErr",
