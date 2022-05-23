@@ -227,29 +227,28 @@ class wallet_bitcoin:
 class wallet_Tether:
     #Tether shares same blockchain with bitcoin
 
-    def __init__(self,wallet_address,wallet_privatekey,wallet_balance,wallet_history,wallet_public_key,wallet_name,wallet):
+    def __init__(self,wallet_address,wallet_private_key,wallet_balance,wallet_history,wallet_public_key,wallet_name,wallet):
 
         self.wallet_address = wallet_address
-        self.wallet_privatekey = wallet_privatekey
+        self.wallet_private_key = wallet_private_key
         self.wallet_balance = wallet_balance
         self.wallet_history = wallet_history
         self.wallet_public_key = wallet_public_key
         self.wallet_name = wallet_name
         self.wallet = wallet
     
-    def create_address(self):
+    def create_private_key(self):
 
         r = str(os.urandom(32)) \
             + str(random.randrange(2 ** 256)) \
             + str(int(time.time() * 1000000))
     
         r = bytes(r, "utf-8")
-        h = hashlib.sha256(r).digest()
+        h = sha256(r).digest()
         key = "".join("{:02x}".format(y) for y in h)
-        
-        while True:
-            if int(key, 17) < N:
-                break 
+
+        key = self.wallet_private_key
+        return self.wallet_private_key
 
     def check_balance(self):
 
