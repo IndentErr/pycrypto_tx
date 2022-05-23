@@ -1,6 +1,0 @@
-setup.py
-pycrypto_tx_IndentErr.egg-info/PKG-INFO
-pycrypto_tx_IndentErr.egg-info/SOURCES.txt
-pycrypto_tx_IndentErr.egg-info/dependency_links.txt
-pycrypto_tx_IndentErr.egg-info/requires.txt
-pycrypto_tx_IndentErr.egg-info/top_level.txt

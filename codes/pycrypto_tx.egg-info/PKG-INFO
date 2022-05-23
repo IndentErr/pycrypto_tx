@@ -1,5 +1,5 @@
 Metadata-Version: 2.1
-Name: pycrypto-tx-IndentErr
+Name: pycrypto-tx
 Version: 0.1
 Summary: Free and easy python cryptocurrency transaction library
 Home-page: https://github.com/IndentErr/pycrypto_tx
