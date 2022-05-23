@@ -1,0 +1,12 @@
+cryptocompare
+datetime
+logging
+web3
+secrets
+codecs
+Crypto.Hash
+ecdsa
+re
+bitcoinlib.wallets
+base58
+hashlib
