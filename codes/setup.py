@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-name = "pycrypto_tx - IndentErr",
+name = "pycrypto_tx",
 version = "0.2",
 license = "MIT",
 author = "IndentErr",

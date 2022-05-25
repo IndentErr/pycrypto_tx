@@ -1,0 +1,8 @@
+cryptocompare
+datetime
+web3
+cryptodome
+ecdsa
+bitcoinlib
+base58
+hashlib
